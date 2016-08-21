@@ -1,0 +1,42 @@
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/listCard"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="2dp"
+    android:layout_marginRight="2dp"
+    android:layout_marginTop="2dp"
+    android:layout_marginBottom="2dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?selectableItemBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/primary_text">
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/space_shuttle"/>
+        <TextView
+            android:id="@+id/textViewTitle"
+            style="@style/TextAppearance.AppCompat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:ellipsize="end"
+            android:fontFamily="sans-serif-light"
+            android:textColor="@color/primary_text_light"
+            tools:text="Enchanced interference cancellation and telemetry reception in multipath environments with a single paraboic dish antenna using a focal plane array"
+             />
+
+
+
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>
