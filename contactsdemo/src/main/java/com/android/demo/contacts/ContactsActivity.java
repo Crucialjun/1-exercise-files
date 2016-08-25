@@ -1,7 +1,9 @@
 package com.android.demo.contacts;
 
 import android.content.ContentResolver;
+import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
@@ -13,7 +15,7 @@ import com.android.demo.contacts.model.Contact;
 
 import java.util.ArrayList;
 
-public class ContactsActivity extends AppCompatActivity {
+public class ContactsActivity extends AppCompatActivity implements ContactsAdapter.CallContact {
     private static final String TAG = ContactsActivity.class.getSimpleName();
     private RecyclerView mRecyclerView;
     private ContactsAdapter mAdapter;
@@ -36,11 +38,12 @@ public class ContactsActivity extends AppCompatActivity {
     {
         mRecyclerView=(RecyclerView) findViewById(R.id.recyclerview);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter=new ContactsAdapter(getLayoutInflater());
+        mAdapter=new ContactsAdapter(getLayoutInflater(),this);
         mRecyclerView.setAdapter(mAdapter);
 
 
     }
+
 
 
     private ArrayList<Contact> fetchAllContacts()
@@ -84,6 +87,13 @@ public class ContactsActivity extends AppCompatActivity {
     {
         for (Contact contact:mContacts)
             contact.generateAsciiSum();
+    }
+
+    @Override
+    public void callNumber(String number) {
+        Intent callIntent = new Intent(Intent.ACTION_CALL);
+        callIntent.setData(Uri.parse("tel:"+number));
+        startActivity(callIntent);
     }
 
 }
