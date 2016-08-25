@@ -57,7 +57,9 @@ public class ContactsProblemActivity extends AppCompatActivity implements Contac
     }
 
     private void fetchContacts() {
-        mContacts=fetchAllContacts();
+        mContacts=MockContacts.mockContacts();
+        //mContacts=fetchAllContacts();
+
         generateAsciiSumForAllContacts();
         mAdapter.addItems(mContacts);
     }
