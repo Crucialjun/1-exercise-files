@@ -14,13 +14,13 @@ import java.util.ArrayList;
 /**
  * Created by omrierez on 25/08/16.
  */
-public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ContactViewHolder> {
+public class UnhappyContactsAdapter extends RecyclerView.Adapter<UnhappyContactsAdapter.ContactViewHolder> {
 
     private ArrayList<Contact> mItems = new ArrayList<>();
     private LayoutInflater mLi;
     private CallContact mCallContact;
 
-    public ContactsAdapter(LayoutInflater li,CallContact callContact) {
+    public UnhappyContactsAdapter(LayoutInflater li, CallContact callContact) {
         mLi = li;
         mCallContact=callContact;
     }

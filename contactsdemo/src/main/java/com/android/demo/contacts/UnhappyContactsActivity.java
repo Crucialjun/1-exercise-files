@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -13,26 +14,27 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.android.demo.contacts.model.Contact;
 
 import java.util.ArrayList;
 
-public class ContactsProblemActivity extends AppCompatActivity implements ContactsAdapter.CallContact {
-    private static final String TAG = ContactsProblemActivity.class.getSimpleName();
+public class UnhappyContactsActivity extends AppCompatActivity implements UnhappyContactsAdapter.CallContact {
+    private static final String TAG = UnhappyContactsActivity.class.getSimpleName();
     private RecyclerView mRecyclerView;
-    private ContactsAdapter mAdapter;
+    private UnhappyContactsAdapter mAdapter;
     private FloatingActionButton mFab;
     private ImageView mIvBackground;
+    private TextView mTvRamUsage;
     private ArrayList<Contact> mContacts;
+    private final Handler mHandler=new Handler();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initViews();
-
-
-
+        startRamUsageThread();
 
 
     }
@@ -41,7 +43,7 @@ public class ContactsProblemActivity extends AppCompatActivity implements Contac
     {
         mRecyclerView=(RecyclerView) findViewById(R.id.recyclerview);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter=new ContactsAdapter(getLayoutInflater(),this);
+        mAdapter=new UnhappyContactsAdapter(getLayoutInflater(),this);
         mRecyclerView.setAdapter(mAdapter);
         mFab=(FloatingActionButton) findViewById(R.id.fab);
         mFab.setOnClickListener(new View.OnClickListener() {
@@ -52,8 +54,33 @@ public class ContactsProblemActivity extends AppCompatActivity implements Contac
             }
         });
         mIvBackground=(ImageView)findViewById(R.id.ivbackground);
+        mTvRamUsage=(TextView)findViewById(R.id.tvRamUsage);
 
 
+    }
+
+    private void startRamUsageThread()
+    {
+        new Thread(){
+            @Override
+            public void run() {
+                super.run();
+                try {
+                    while(true) {
+                        sleep(200);
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                String ramUsage = String.format("%.3f MB, free:%.3f MB", ((float)(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory())/1000000), ((float)Runtime.getRuntime().freeMemory())/1000000);
+                                mTvRamUsage.setText(ramUsage);
+                            }
+                        });
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
     }
 
     private void fetchContacts() {
@@ -62,6 +89,7 @@ public class ContactsProblemActivity extends AppCompatActivity implements Contac
 
         generateAsciiSumForAllContacts();
         mAdapter.addItems(mContacts);
+
     }
 
 

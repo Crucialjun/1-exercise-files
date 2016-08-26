@@ -6,13 +6,24 @@
     android:layout_height="match_parent"
     android:background="@color/dark_gray"
 
-    tools:context=".ContactsProblemActivity">
+    tools:context=".UnhappyContactsActivity">
     <ImageView
         android:id="@+id/ivbackground"
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:scaleType="centerCrop"
         android:elevation="4dp"/>
+
+    <TextView
+        android:id="@+id/tvRamUsage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="top|right"
+        android:layout_margin="8dp"
+        android:textColor="@android:color/white"
+        tools:text="127 mb"
+        android:elevation="6dp"
+     />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerview"
