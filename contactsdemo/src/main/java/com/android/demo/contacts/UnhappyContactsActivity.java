@@ -27,6 +27,7 @@ public class UnhappyContactsActivity extends AppCompatActivity implements Unhapp
     private FloatingActionButton mFab;
     private ImageView mIvBackground;
     private TextView mTvRamUsage;
+    //problem 2.3
     private ArrayList<Contact> mContacts;
     private final Handler mHandler=new Handler();
     @Override
@@ -43,12 +44,13 @@ public class UnhappyContactsActivity extends AppCompatActivity implements Unhapp
     {
         mRecyclerView=(RecyclerView) findViewById(R.id.recyclerview);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter=new UnhappyContactsAdapter(getLayoutInflater(),this);
+        mAdapter=new UnhappyContactsAdapter(this,this);
         mRecyclerView.setAdapter(mAdapter);
         mFab=(FloatingActionButton) findViewById(R.id.fab);
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //problem 2.4
                 mIvBackground.setBackgroundResource(R.drawable.background);
                 fetchContacts();
             }
@@ -61,6 +63,7 @@ public class UnhappyContactsActivity extends AppCompatActivity implements Unhapp
 
     private void startRamUsageThread()
     {
+        //problem 3.2
         new Thread(){
             @Override
             public void run() {
@@ -95,6 +98,7 @@ public class UnhappyContactsActivity extends AppCompatActivity implements Unhapp
 
     private ArrayList<Contact> fetchAllContacts()
     {
+        //problem 2.2
         Log.d(TAG, "fetchAllContacts() start");
         ArrayList<Contact> contacts=new ArrayList<>();
         ContentResolver cr = getContentResolver();

@@ -1,5 +1,7 @@
 package com.android.demo.contacts;
 
+import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,9 +21,12 @@ public class UnhappyContactsAdapter extends RecyclerView.Adapter<UnhappyContacts
     private ArrayList<Contact> mItems = new ArrayList<>();
     private LayoutInflater mLi;
     private CallContact mCallContact;
+    //problem 3.1
+    private static Context mContext;
 
-    public UnhappyContactsAdapter(LayoutInflater li, CallContact callContact) {
-        mLi = li;
+    public UnhappyContactsAdapter(Context context, CallContact callContact) {
+        mContext=context;
+        mLi = ((AppCompatActivity)mContext).getLayoutInflater();
         mCallContact=callContact;
     }
 
