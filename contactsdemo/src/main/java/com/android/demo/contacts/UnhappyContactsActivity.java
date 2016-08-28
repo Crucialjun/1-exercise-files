@@ -70,10 +70,11 @@ public class UnhappyContactsActivity extends AppCompatActivity implements Unhapp
                 super.run();
                 try {
                     while(true) {
-                        sleep(200);
+                        sleep(20);
                         mHandler.post(new Runnable() {
                             @Override
                             public void run() {
+                                //problem 2.2
                                 String ramUsage = String.format("%.3f MB, free:%.3f MB", ((float)(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory())/1000000), ((float)Runtime.getRuntime().freeMemory())/1000000);
                                 mTvRamUsage.setText(ramUsage);
                             }
