@@ -7,3 +7,5 @@
 /build
 /captures
 
+*.class
+app/build
