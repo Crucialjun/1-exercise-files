@@ -1,32 +1,34 @@
-package com.android.demo.contacts;
+package com.android.demo.contacts.module3;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.android.demo.contacts.R;
+import com.android.demo.contacts.interfaces.CallContact;
 import com.android.demo.contacts.model.Contact;
-
-import java.util.ArrayList;
 
 /**
  * Created by omrierez on 25/08/16.
  */
-public class UnhappyContactsAdapter extends RecyclerView.Adapter<UnhappyContactsAdapter.ContactViewHolder> {
+public class Module3HappyContactsAdapter extends RecyclerView.Adapter<Module3HappyContactsAdapter.ContactViewHolder> {
 
-    private ArrayList<Contact> mItems = new ArrayList<>();
-    private LayoutInflater mLi;
+    private static final String TAG = "ContactsAdapter";
+
+    private SparseArray<Contact> mItems = new SparseArray<>();
     private CallContact mCallContact;
-    //problem 3.1
-    private static Context mContext;
-
-    public UnhappyContactsAdapter(Context context, CallContact callContact) {
-        mContext=context;
-        mLi = ((AppCompatActivity)mContext).getLayoutInflater();
+    private  Context mContext;
+    private LayoutInflater mLi;
+    public Module3HappyContactsAdapter(Context activityContext, CallContact callContact) {
+        mLi=((AppCompatActivity)activityContext).getLayoutInflater();
+        mContext=activityContext.getApplicationContext();
         mCallContact=callContact;
     }
 
@@ -42,6 +44,7 @@ public class UnhappyContactsAdapter extends RecyclerView.Adapter<UnhappyContacts
 
     @Override
     public void onBindViewHolder(final ContactViewHolder holder, int position) {
+        long startTime=System.currentTimeMillis();
         final Contact contact = mItems.get(position);
         holder.mTvName.setText(contact.getName());
         holder.mTvNumber.setText(contact.getNumber());
@@ -52,11 +55,13 @@ public class UnhappyContactsAdapter extends RecyclerView.Adapter<UnhappyContacts
                 mCallContact.callNumber(holder.mTvNumber.getText().toString());
             }
         });
+        Log.d(TAG, String.format("onBindViewHolder() took : %d",(System.currentTimeMillis()-startTime)));
+
 
     }
 
 
-    public void addItems(ArrayList<Contact> contacts) {
+    public void addItems(SparseArray<Contact> contacts) {
         mItems.clear();
         mItems = contacts;
         notifyDataSetChanged();
@@ -79,8 +84,5 @@ public class UnhappyContactsAdapter extends RecyclerView.Adapter<UnhappyContacts
     }
 
 
-    public interface CallContact
-    {
-        void callNumber(String number);
-    }
+
 }
