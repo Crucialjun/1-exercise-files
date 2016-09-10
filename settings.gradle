@@ -1,1 +1,4 @@
-include ':nasademo', ':perf_loop', ':contactsdemo'
+include ':perf_loop_before', ':perf_loop_after'
+include ':contactsdemo_before', ':contactsdemo_afterM2'
+include ':contactsdemo_beforeM3', ':contactsdemo_afterM3'
+include ':nasademo'
