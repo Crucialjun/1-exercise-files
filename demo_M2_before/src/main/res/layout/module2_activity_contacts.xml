@@ -87,6 +87,7 @@
             android:layout_margin="16dp"
             android:backgroundTint="@color/yellow"
             app:elevation="6dp"
+            android:background="@android:color/transparent"
             app:pressedTranslationZ="12dp" />
 
     </LinearLayout>
