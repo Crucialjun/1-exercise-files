@@ -46,14 +46,11 @@ public class M2BeforeContactsActivity extends Module2BaseActivity {
                 super.run();
                 try {
                     while (true) {
-                        sleep(100);
-                        mHandler.post(new Runnable() {
-                            @Override
-                            public void run() {
+                        sleep(10);
+                        mHandler.post(() -> {
 
-                                String ramUsage = String.format("%.3f MB\nfree:%.3f MB", ((float) (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1000000), ((float) Runtime.getRuntime().freeMemory()) / 1000000);
-                                mTvRamUsage.setText(ramUsage);
-                            }
+                            String ramUsage = String.format("%.3f MB\nfree:%.3f MB", ((float) (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1000000), ((float) Runtime.getRuntime().freeMemory()) / 1000000);
+                            mTvRamUsage.setText(ramUsage);
                         });
                     }
                 } catch (InterruptedException e) {
@@ -67,12 +64,27 @@ public class M2BeforeContactsActivity extends Module2BaseActivity {
 
     @Override
     void runLoop() {
-        long sum = 0;
-        for (int i = 0; i < 10000; i++) {
-            sum += poorPerformanceLoop();
-        }
-        Log.d(TAG,"Avg execution time : " + (float) sum/10000);
+        new Thread(){
+            @Override
+            public void run() {
+                super.run();
+                long sum = 0;
+                for (int i = 0; i < 10000; i++) {
+                    sum += poorPerformanceLoop();
+                    //sleepDelay();
+                }
+                Log.d(TAG,"Avg execution time : " + (float) sum/10000);
 
+            }
+
+        }.start();
+    }
+    private void sleepDelay() {
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
     public long poorPerformanceLoop() {
         long timeStart = System.currentTimeMillis();

@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.util.SparseArray;
 
-import com.android.demo.contacts.mock.MockContacts;
 import com.android.demo.contacts.model.Contact;
 import com.android.demo.contacts.model.Model;
 import com.android.demo.contacts.model.OptModel;
@@ -23,15 +22,17 @@ public class M2AfterContactsActivity extends Module2BaseActivity {
     private final StringBuilder mStrBuilder = new StringBuilder();
     private final Runtime mRuntime = Runtime.getRuntime();
     private float mFreeRam;
+    private float mTotalRam;
 
     Runnable ramRunnable = new Runnable() {
         @Override
         public void run() {
             ////////////////2.3 Prefer to use StringBuilder for dynamic strings and extract constants where possible//////
             mFreeRam = (float) mRuntime.freeMemory();
+            mTotalRam=(float)mRuntime.totalMemory();
             mStrBuilder
                     .append("Used: ")
-                    .append((mRuntime.totalMemory() - mFreeRam) / MB_DIVIDER)
+                    .append((mTotalRam - mFreeRam) / MB_DIVIDER)
                     .append("MB\n")
                     .append("free:")
                     .append(mFreeRam / MB_DIVIDER);
@@ -60,7 +61,6 @@ public class M2AfterContactsActivity extends Module2BaseActivity {
     @Override
     void loadContacts() {
         mAdapter.clear();
-        mContacts = MockContacts.mockSpareContacts();
         mContacts= ContactsUtils.betterSparseFetchAllContacts(getApplicationContext());
         generateAsciiSumForAllContacts();
         mAdapter.addItems(mContacts);
@@ -75,7 +75,7 @@ public class M2AfterContactsActivity extends Module2BaseActivity {
                 super.run();
                 try {
                     while (true) {
-                        sleep(100);
+                        sleep(10);
                         mHandler.post(ramRunnable);
                     }
                 } catch (InterruptedException e) {
@@ -87,13 +87,20 @@ public class M2AfterContactsActivity extends Module2BaseActivity {
 
     ArrayList<Model> data = generateDataSet();
     ArrayList<OptModel> optData = generateOptDataSet();
+
     @Override
     void runLoop() {
-        long sum = 0;
-        for (int i = 0; i < 10000; i++) {
-            sum += goodPerformanceLoop();
-        }
-        Log.d(TAG,"Avg execution time : " + (float) sum/10000);
+        new Thread(){
+            @Override
+            public void run() {
+                super.run();
+                long sum = 0;
+                for (int i = 0; i < 10000; i++) {
+                    sum += goodPerformanceLoop();
+                }
+                Log.d(TAG,"Avg execution time : " + (float) sum/10000);
+            }
+        }.start();
 
 
 
