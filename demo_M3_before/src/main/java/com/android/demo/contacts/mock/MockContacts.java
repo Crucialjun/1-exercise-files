@@ -1,8 +1,8 @@
-package com.android.demo.contacts.mock;
+package com.android.demo.m2.mock;
 
 import android.util.SparseArray;
 
-import com.android.demo.contacts.model.Contact;
+import com.android.demo.m2.model.Contact;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.android.demo.contacts;
+package com.android.demo.m2;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
@@ -11,8 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.android.demo.contacts.interfaces.CallContact;
-import com.android.demo.contacts.model.Contact;
+import com.android.demo.m2.interfaces.CallContact;
+import com.android.demo.m2.model.Contact;
 
 /**
  * Created by omrierez on 25/08/16.

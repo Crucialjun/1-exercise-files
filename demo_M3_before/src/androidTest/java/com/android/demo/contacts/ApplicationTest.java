@@ -1,4 +1,4 @@
-package com.android.demo.contacts;
+package com.android.demo.m2;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

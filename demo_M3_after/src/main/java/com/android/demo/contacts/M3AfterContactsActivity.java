@@ -1,4 +1,4 @@
-package com.android.demo.contacts;
+package com.android.demo.m2;
 
 import android.os.Bundle;
 import android.widget.TextView;

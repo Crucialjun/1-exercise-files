@@ -1,4 +1,4 @@
-package com.android.demo.contacts.utils;
+package com.android.demo.m2.utils;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -7,7 +7,7 @@ import android.provider.ContactsContract;
 import android.util.Log;
 import android.util.SparseArray;
 
-import com.android.demo.contacts.model.Contact;
+import com.android.demo.m2.model.Contact;
 
 import java.util.ArrayList;
 

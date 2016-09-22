@@ -1,4 +1,4 @@
-package com.android.demo.contacts.utils;
+package com.android.demo.m2.utils;
 
 import android.app.Activity;
 import android.content.Intent;

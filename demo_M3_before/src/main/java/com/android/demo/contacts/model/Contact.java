@@ -1,4 +1,4 @@
-package com.android.demo.contacts.model;
+package com.android.demo.m2.model;
 
 /**
  * Created by omrierez on 25/08/16.

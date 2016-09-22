@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_gray"
+
+    tools:context=".M2BeforeActivity">
+
+    <ImageView
+        android:id="@+id/ivbackground"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:elevation="4dp"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/tvRamUsage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:elevation="6dp"
+        android:gravity="top|center"
+        android:background="@android:color/black"
+        android:textColor="@android:color/white"
+        tools:text="127 mb" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/ivbackground"
+        android:orientation="vertical">
+    </android.support.v7.widget.RecyclerView>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="bottom|center">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/recyclerview"
+            android:layout_alignParentBottom="true"
+            android:layout_alignRight="@+id/recyclerview"
+            android:layout_margin="16dp"
+            android:backgroundTint="@color/green"
+            app:elevation="6dp"
+            app:pressedTranslationZ="12dp" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/recyclerview"
+            android:layout_alignParentBottom="true"
+            android:layout_alignRight="@+id/recyclerview"
+            android:layout_margin="16dp"
+            android:backgroundTint="@color/red"
+            app:elevation="6dp"
+            app:pressedTranslationZ="12dp" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/recyclerview"
+            android:layout_alignParentBottom="true"
+            android:layout_alignRight="@+id/recyclerview"
+            android:layout_margin="16dp"
+            android:backgroundTint="@color/blue"
+            app:elevation="6dp"
+            app:pressedTranslationZ="12dp" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/recyclerview"
+            android:layout_alignParentBottom="true"
+            android:layout_alignRight="@+id/recyclerview"
+            android:layout_margin="16dp"
+            android:backgroundTint="@color/yellow"
+            app:elevation="6dp"
+            android:background="@android:color/transparent"
+            app:pressedTranslationZ="12dp" />
+
+    </LinearLayout>
+</RelativeLayout>

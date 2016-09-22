@@ -1,3 +1,3 @@
-include ':demo_M2_before', ':demo_M2_after'
-include ':demo_M3_before', ':demo_M3_after'
-include ':nasademo'
+include ':m2_before', ':m2_after'
+//include ':demo_M3_before', ':demo_M3_after'
+//include ':nasademo'

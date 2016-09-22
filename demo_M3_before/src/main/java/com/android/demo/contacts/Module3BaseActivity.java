@@ -1,4 +1,4 @@
-package com.android.demo.contacts;
+package com.android.demo.m2;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,10 +13,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.demo.contacts.interfaces.CallContact;
-import com.android.demo.contacts.mock.MockContacts;
-import com.android.demo.contacts.model.Contact;
-import com.android.demo.contacts.utils.CallUtils;
+import com.android.demo.m2.interfaces.CallContact;
+import com.android.demo.m2.mock.MockContacts;
+import com.android.demo.m2.model.Contact;
+import com.android.demo.m2.utils.CallUtils;
 
 /**
  * Created by omrierez on 9/3/16.
