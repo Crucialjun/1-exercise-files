@@ -1,32 +1,74 @@
 package com.android.demo.m2;
 
-import android.os.Bundle;
 import android.util.Log;
-
-import com.android.demo.m2.model.Model;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class M2BeforeActivity extends Module2BaseActivity {
+import omz.android.baselib.M2BaseActivity;
+import omz.android.baselib.model.Model;
+
+public class M2BeforeActivity extends M2BaseActivity {
     private static final String TAG = M2BeforeActivity.class.getSimpleName();
-
+    ArrayList<Model> data = generateDataSet();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void runLoop() {
+        new Thread(){
+            @Override
+            public void run() {
+                //problem 2.1
+                super.run();
+                long sum = 0;
+                for (int i = 0; i < 10000; i++) {
+                    sum += poorPerformanceLoop();
+                    //sleepDelay();
+                }
+                Log.d(TAG,"Avg execution time : " + (float) sum/500);
 
+            }
+
+        }.start();
     }
 
+    public long poorPerformanceLoop() {
+        long timeStart = System.currentTimeMillis();
+        for (int i = 0; i < data.size(); i++) {
+            Model model = data.get(i);
+            int age = model.getAge();
+            String family = model.getFamily();
+            String name=model.getName();
+            boolean flag= model.isFlag();
+            String full=name+family;
+
+        }
+        return System.currentTimeMillis() - timeStart;
+    }
+    private void sleepDelay() {
+        try {
+            Thread.sleep(30);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
     @Override
-    void loadImage() {
+    protected void loadImage() {
         //problem 2.2
+       /* Bitmap bitmap=BitmapFactory.decodeResource(getResources(), R.drawable.background);
+        int size=bitmap.getAllocationByteCount();
+        Log.d(TAG,"Bitmap uncompressed size: "+size);
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 50, out);
+        bitmap= BitmapFactory.decodeStream(new ByteArrayInputStream(out.toByteArray()));
+        size=bitmap.getAllocationByteCount();
+        Log.d(TAG,"Bitmap compressed size: "+size);*/
         mIvBackground.setImageResource(R.drawable.background);
+
     }
 
 
     @Override
-    void startRamUsageThread() {
+    protected void startRamUsageThread() {
         new Thread() {
             @Override
             public void run() {
@@ -46,45 +88,7 @@ public class M2BeforeActivity extends Module2BaseActivity {
         }.start();
     }
 
-    ArrayList<Model> data = generateDataSet();
 
-    @Override
-    void runLoop() {
-        new Thread(){
-            @Override
-            public void run() {
-                super.run();
-                long sum = 0;
-                for (int i = 0; i < 500; i++) {
-                    sum += poorPerformanceLoop();
-                    sleepDelay();
-                }
-                Log.d(TAG,"Avg execution time : " + (float) sum/500);
-
-            }
-
-        }.start();
-    }
-    private void sleepDelay() {
-        try {
-            Thread.sleep(30);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-    public long poorPerformanceLoop() {
-        long timeStart = System.currentTimeMillis();
-        for (int i = 0; i < data.size(); i++) {
-            Model model = data.get(i);
-            int age = model.getAge();
-            String family = model.getFamily();
-            String name=model.getName();
-            boolean flag= model.isFlag();
-            String full=name+family;
-
-        }
-        return System.currentTimeMillis() - timeStart;
-    }
 
 
     public ArrayList<Model> generateDataSet() {

@@ -1,4 +1,4 @@
-package com.android.demo.m2.model;
+package omz.android.baselib.model;
 
 /**
  * Created by omrierez on 8/24/16.

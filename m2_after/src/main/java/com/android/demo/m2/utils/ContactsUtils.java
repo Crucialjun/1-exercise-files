@@ -7,8 +7,6 @@ import android.provider.ContactsContract;
 import android.util.Log;
 import android.util.SparseArray;
 
-import com.android.demo.m2.model.Contact;
-
 import java.util.ArrayList;
 
 /**

@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class M2AfterActivity extends Module2BaseActivity {
+public class M2AfterActivity extends M2BaseActivity {
     private static final String TAG = M2AfterActivity.class.getSimpleName();
 
 
