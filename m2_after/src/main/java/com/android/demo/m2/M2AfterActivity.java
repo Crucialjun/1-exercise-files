@@ -10,9 +10,11 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 import java.util.Random;
 
+import omz.android.baselib.M2BaseActivity;
+
 public class M2AfterActivity extends M2BaseActivity {
     private static final String TAG = M2AfterActivity.class.getSimpleName();
-
+    protected static final int MB_DIVIDER=1000000;
 
     private final StringBuilder mStrBuilder = new StringBuilder();
     private final Runtime mRuntime = Runtime.getRuntime();
@@ -45,7 +47,7 @@ public class M2AfterActivity extends M2BaseActivity {
 
 
     @Override
-    void loadImage() {
+    protected void loadImage() {
        Glide.with(this)
                 .load(R.drawable.background)
                 .override(mIvBackground.getWidth(), mIvBackground.getHeight())
@@ -59,7 +61,7 @@ public class M2AfterActivity extends M2BaseActivity {
 
 
     @Override
-    void startRamUsageThread() {
+    protected void startRamUsageThread() {
         new Thread() {
             @Override
             public void run() {
@@ -80,7 +82,7 @@ public class M2AfterActivity extends M2BaseActivity {
     ArrayList<OptModel> optData = generateOptDataSet();
 
     @Override
-    void runLoop() {
+    protected void runLoop() {
         new Thread(){
             @Override
             public void run() {
