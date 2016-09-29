@@ -67,7 +67,7 @@ public class M2BeforeActivity extends M2BaseActivity {
                 super.run();
                 try {
                     while (true) {
-                        sleep(5);
+                        sleep(20);
                         //*****************************************problem 2.3*********************************************
                         mHandler.post(() -> {
                             String ramUsage = String.format("%.3f MB\nfree:%.3f MB",

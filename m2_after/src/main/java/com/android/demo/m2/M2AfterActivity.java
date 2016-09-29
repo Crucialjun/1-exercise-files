@@ -14,8 +14,8 @@ import omz.android.baselib.M2BaseActivity;
 
 public class M2AfterActivity extends M2BaseActivity {
     private static final String TAG = M2AfterActivity.class.getSimpleName();
-    protected static final int MB_DIVIDER=1000000;
-    protected static final String FLOAT_FORMAT="%.3f";
+    protected static final int INT_MB_DIVIDER =1000000;
+    protected static final String STR_FLOAT_FORMAT ="%.3f";
 
 
     private final StringBuilder mStrBuilder = new StringBuilder();
@@ -30,20 +30,13 @@ public class M2AfterActivity extends M2BaseActivity {
 
     }
 
-
     @Override
     protected void loadImage() {
        Glide.with(this)
                 .load(R.drawable.background)
                 .override(mIvBackground.getWidth(), mIvBackground.getHeight())
                 .into(mIvBackground);
-
-
-
     }
-
-
-
 
     @Override
     protected void startRamUsageThread() {
@@ -60,10 +53,10 @@ public class M2AfterActivity extends M2BaseActivity {
                             mTotalRam = (float) mRuntime.totalMemory();
                             mStrBuilder
                                     .append("Used: ")
-                                    .append(String.format(FLOAT_FORMAT, (mTotalRam - mFreeRam) / MB_DIVIDER))
+                                    .append(String.format(STR_FLOAT_FORMAT, (mTotalRam - mFreeRam) / INT_MB_DIVIDER))
                                     .append("MB\n")
                                     .append("free:")
-                                    .append(String.format(FLOAT_FORMAT, mFreeRam / MB_DIVIDER));
+                                    .append(String.format(STR_FLOAT_FORMAT, mFreeRam / INT_MB_DIVIDER));
                             mTvRamUsage.setText(mStrBuilder.toString());
                             mStrBuilder.delete(0, mStrBuilder.length());
                             /////////////////////////////////////////////////////////////////////////////////////////////////
