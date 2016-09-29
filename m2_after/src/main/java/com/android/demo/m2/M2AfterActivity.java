@@ -15,29 +15,14 @@ import omz.android.baselib.M2BaseActivity;
 public class M2AfterActivity extends M2BaseActivity {
     private static final String TAG = M2AfterActivity.class.getSimpleName();
     protected static final int MB_DIVIDER=1000000;
+    protected static final String FLOAT_FORMAT="%.3f";
+
 
     private final StringBuilder mStrBuilder = new StringBuilder();
     private final Runtime mRuntime = Runtime.getRuntime();
     private float mFreeRam;
     private float mTotalRam;
 
-    Runnable ramRunnable = new Runnable() {
-        @Override
-        public void run() {
-            ////////////////2.3 Prefer to use StringBuilder for dynamic strings and extract constants where possible//////
-            mFreeRam = (float) mRuntime.freeMemory();
-            mTotalRam=(float)mRuntime.totalMemory();
-            mStrBuilder
-                    .append("Used: ")
-                    .append((mTotalRam - mFreeRam) / MB_DIVIDER)
-                    .append("MB\n")
-                    .append("free:")
-                    .append(mFreeRam / MB_DIVIDER);
-            mTvRamUsage.setText(mStrBuilder.toString());
-            mStrBuilder.delete(0, mStrBuilder.length());
-            /////////////////////////////////////////////////////////////////////////////////////////////////
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,8 +53,21 @@ public class M2AfterActivity extends M2BaseActivity {
                 super.run();
                 try {
                     while (true) {
-                        sleep(10);
-                        mHandler.post(ramRunnable);
+                        sleep(20);
+                        mHandler.post(() -> {
+                            ////////////////2.3 Prefer to use StringBuilder for dynamic strings and extract constants where possible//////
+                            mFreeRam = (float) mRuntime.freeMemory();
+                            mTotalRam = (float) mRuntime.totalMemory();
+                            mStrBuilder
+                                    .append("Used: ")
+                                    .append(String.format(FLOAT_FORMAT, (mTotalRam - mFreeRam) / MB_DIVIDER))
+                                    .append("MB\n")
+                                    .append("free:")
+                                    .append(String.format(FLOAT_FORMAT, mFreeRam / MB_DIVIDER));
+                            mTvRamUsage.setText(mStrBuilder.toString());
+                            mStrBuilder.delete(0, mStrBuilder.length());
+                            /////////////////////////////////////////////////////////////////////////////////////////////////
+                        });
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -88,10 +86,10 @@ public class M2AfterActivity extends M2BaseActivity {
             public void run() {
                 super.run();
                 long sum = 0;
-                for (int i = 0; i < 10000; i++) {
+                for (int i = 0; i < 500; i++) {
                     sum += goodPerformanceLoop();
                 }
-                Log.d(TAG,"Avg execution time : " + (float) sum/10000);
+                Log.d(TAG,"Avg execution time : " + (float) sum/500);
             }
         }.start();
 

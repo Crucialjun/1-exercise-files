@@ -17,7 +17,7 @@ public class M2BeforeActivity extends M2BaseActivity {
         new Thread(){
             @Override
             public void run() {
-                //problem 2.1
+                //****************************problem 2.1*****************************************
                 super.run();
                 long sum = 0;
                 for (int i = 0; i < 10000; i++) {
@@ -53,15 +53,7 @@ public class M2BeforeActivity extends M2BaseActivity {
     }
     @Override
     protected void loadImage() {
-        //problem 2.2
-       /* Bitmap bitmap=BitmapFactory.decodeResource(getResources(), R.drawable.background);
-        int size=bitmap.getAllocationByteCount();
-        Log.d(TAG,"Bitmap uncompressed size: "+size);
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 50, out);
-        bitmap= BitmapFactory.decodeStream(new ByteArrayInputStream(out.toByteArray()));
-        size=bitmap.getAllocationByteCount();
-        Log.d(TAG,"Bitmap compressed size: "+size);*/
+        //*****************************************problem 2.2******************************************
         mIvBackground.setImageResource(R.drawable.background);
 
     }
@@ -75,9 +67,12 @@ public class M2BeforeActivity extends M2BaseActivity {
                 super.run();
                 try {
                     while (true) {
-                        sleep(10);
+                        sleep(5);
+                        //*****************************************problem 2.3*********************************************
                         mHandler.post(() -> {
-                            String ramUsage = String.format("%.3f MB\nfree:%.3f MB", ((float) (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1000000), ((float) Runtime.getRuntime().freeMemory()) / 1000000);
+                            String ramUsage = String.format("%.3f MB\nfree:%.3f MB",
+                                    ((float) (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1000000),
+                                    ((float) Runtime.getRuntime().freeMemory()) / 1000000);
                             mTvRamUsage.setText(ramUsage);
                         });
                     }

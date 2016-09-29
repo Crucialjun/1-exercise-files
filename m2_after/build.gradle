@@ -31,7 +31,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile project(':baselib')
     compile 'com.github.bumptech.glide:glide:3.6.0'
-    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.4-beta1'
-    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta1'
 
 }
