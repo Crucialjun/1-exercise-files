@@ -8,6 +8,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Random;
+
+import omz.android.baselib.model.Model;
+
 /**
  * Created by omrierez on 9/3/16.
  */
@@ -55,6 +60,16 @@ public abstract class M2BaseActivity extends AppCompatActivity implements View.O
             loadImage();
         else if (resId == R.id.fab3)
             runLoop();
+    }
+
+    protected ArrayList<Model> generateDataSet() {
+        Random random = new Random();
+        ArrayList<Model> data = new ArrayList();
+        for (int i = 0; i < 1000; i++)
+            data.add(new Model(true, "Android", random.nextInt(), "Performance"));
+
+        return data;
+
     }
 
 

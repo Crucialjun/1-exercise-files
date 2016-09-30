@@ -20,7 +20,7 @@ public class M2BeforeActivity extends M2BaseActivity {
                 //problem 2.1
                 super.run();
                 long sum = 0;
-                for (int i = 0; i < 10000; i++) {
+                for (int i = 0; i < 500; i++) {
                     sum += poorPerformanceLoop();
                     //sleepDelay();
                 }
@@ -46,7 +46,7 @@ public class M2BeforeActivity extends M2BaseActivity {
     }
     private void sleepDelay() {
         try {
-            Thread.sleep(30);
+            Thread.sleep(5);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -54,14 +54,6 @@ public class M2BeforeActivity extends M2BaseActivity {
     @Override
     protected void loadImage() {
         //problem 2.2
-       /* Bitmap bitmap=BitmapFactory.decodeResource(getResources(), R.drawable.background);
-        int size=bitmap.getAllocationByteCount();
-        Log.d(TAG,"Bitmap uncompressed size: "+size);
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 50, out);
-        bitmap= BitmapFactory.decodeStream(new ByteArrayInputStream(out.toByteArray()));
-        size=bitmap.getAllocationByteCount();
-        Log.d(TAG,"Bitmap compressed size: "+size);*/
         mIvBackground.setImageResource(R.drawable.background);
 
     }
@@ -91,15 +83,7 @@ public class M2BeforeActivity extends M2BaseActivity {
 
 
 
-    public ArrayList<Model> generateDataSet() {
-        Random random = new Random();
-        ArrayList<Model> data = new ArrayList();
-        for (int i = 0; i < 1000; i++)
-            data.add(new Model(true, "Android", random.nextInt(), "Performance"));
 
-        return data;
-
-    }
 
 
 }
