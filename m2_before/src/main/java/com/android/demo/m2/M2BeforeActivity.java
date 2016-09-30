@@ -17,7 +17,7 @@ public class M2BeforeActivity extends M2BaseActivity {
         new Thread(){
             @Override
             public void run() {
-                //problem 2.1
+                //****************************problem 2.1*****************************************
                 super.run();
                 long sum = 0;
                 for (int i = 0; i < 500; i++) {
@@ -53,7 +53,11 @@ public class M2BeforeActivity extends M2BaseActivity {
     }
     @Override
     protected void loadImage() {
+<<<<<<< HEAD
         //problem 2.2
+=======
+        //*****************************************problem 2.2******************************************
+>>>>>>> 68757ff18677e6b8972b5229b4cd5efd8cb80d46
         mIvBackground.setImageResource(R.drawable.background);
 
     }
@@ -67,9 +71,12 @@ public class M2BeforeActivity extends M2BaseActivity {
                 super.run();
                 try {
                     while (true) {
-                        sleep(10);
+                        sleep(20);
+                        //*****************************************problem 2.3*********************************************
                         mHandler.post(() -> {
-                            String ramUsage = String.format("%.3f MB\nfree:%.3f MB", ((float) (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1000000), ((float) Runtime.getRuntime().freeMemory()) / 1000000);
+                            String ramUsage = String.format("%.3f MB\nfree:%.3f MB",
+                                    ((float) (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1000000),
+                                    ((float) Runtime.getRuntime().freeMemory()) / 1000000);
                             mTvRamUsage.setText(ramUsage);
                         });
                     }
