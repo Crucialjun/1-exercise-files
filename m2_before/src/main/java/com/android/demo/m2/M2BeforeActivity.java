@@ -1,63 +1,65 @@
 package com.android.demo.m2;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import omz.android.baselib.M2BaseActivity;
-import omz.android.baselib.model.Model;
 
 public class M2BeforeActivity extends M2BaseActivity {
     private static final String TAG = M2BeforeActivity.class.getSimpleName();
-    ArrayList<Model> data = generateDataSet();
+
+    final static int ITERATIONS =4000;
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+    }
+
 
     @Override
     protected void runLoop() {
-        new Thread(){
+            new Thread() {
             @Override
             public void run() {
                 //****************************problem 2.1*****************************************
                 super.run();
                 long sum = 0;
-                for (int i = 0; i < 500; i++) {
+                for (int i = 0; i < ITERATIONS; i++) {
                     sum += poorPerformanceLoop();
                     //sleepDelay();
                 }
-                Log.d(TAG,"Avg execution time : " + (float) sum/500);
-
+                Log.d(TAG, "Avg execution time : " + (float) sum / ITERATIONS);
             }
-
         }.start();
     }
-
     public long poorPerformanceLoop() {
         long timeStart = System.currentTimeMillis();
-        for (int i = 0; i < data.size(); i++) {
-            Model model = data.get(i);
-            int age = model.getAge();
-            String family = model.getFamily();
-            String name=model.getName();
-            boolean flag= model.isFlag();
-            String full=name+family;
-
+        ArrayList<Double> doubleNumbers = new ArrayList<>();
+        for (int j = 0; j < 20; j++) {
+            String[] stringsNums = {"1", "2", "3", "4", "5", "6", "7", "8", "9","10",
+                    "11","12","13","14","15","16","17","18","19","20"};
+            double theDouble = new Double(stringsNums[j]).doubleValue();
+            doubleNumbers.add(theDouble);
         }
         return System.currentTimeMillis() - timeStart;
     }
-    private void sleepDelay() {
-        try {
-            Thread.sleep(5);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
+
+
+
+
+
+
+
+
+
+
     @Override
     protected void loadImage() {
-<<<<<<< HEAD
-        //problem 2.2
-=======
         //*****************************************problem 2.2******************************************
->>>>>>> 68757ff18677e6b8972b5229b4cd5efd8cb80d46
         mIvBackground.setImageResource(R.drawable.background);
 
     }
@@ -86,11 +88,6 @@ public class M2BeforeActivity extends M2BaseActivity {
             }
         }.start();
     }
-
-
-
-
-
 
 
 }

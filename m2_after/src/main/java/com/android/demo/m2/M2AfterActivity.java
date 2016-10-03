@@ -3,12 +3,9 @@ package com.android.demo.m2;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.android.demo.m2.model.Model;
-import com.android.demo.m2.model.OptModel;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import omz.android.baselib.M2BaseActivity;
 
@@ -69,9 +66,7 @@ public class M2AfterActivity extends M2BaseActivity {
         }.start();
     }
 
-    ArrayList<Model> data = generateDataSet();
-    ArrayList<OptModel> optData = generateOptDataSet();
-
+    final static int ITERATIONS =4000;
     @Override
     protected void runLoop() {
         new Thread(){
@@ -79,57 +74,27 @@ public class M2AfterActivity extends M2BaseActivity {
             public void run() {
                 super.run();
                 long sum = 0;
-                for (int i = 0; i < 500; i++) {
-                    sum += goodPerformanceLoop();
+                for (int i = 0; i < ITERATIONS; i++) {
+                    sum += betterPerformanceLoop();
+                    sleepDelay();
                 }
-                Log.d(TAG,"Avg execution time : " + (float) sum/500);
+                Log.d(TAG,"Avg execution time : " + (float) sum/ITERATIONS);
             }
         }.start();
-
-
-
     }
 
     long timeStart = System.currentTimeMillis();
-    int size = data.size();
-    OptModel model;
-    String family, name;
-    boolean flag;
-    int age;
-    public long goodPerformanceLoop() {
+    final static double[] NUMS={1,2,3,4,5,6,7,8,9,10,
+            11,12,13,14,15,16,17,18,19,20};
+    final static int LENGTH=NUMS.length;
+    final static ArrayList<Double> arrayList=new ArrayList<>(LENGTH);
+    public long betterPerformanceLoop() {
+        arrayList.clear();
         timeStart = System.currentTimeMillis();
-        size = data.size();
-        for (int i = 0; i < size; i++) {
-            model = optData.get(i);
-            age = model.age;
-            family = model.family;
-            name = model.name;
-            flag = model.flag;
-
-        }
+           for (short j = 0; j < LENGTH; j++)
+               arrayList.add(NUMS[j]);
         return System.currentTimeMillis() - timeStart;
     }
-
-
-    public ArrayList<Model> generateDataSet() {
-        Random random = new Random();
-        ArrayList<Model> data = new ArrayList();
-        for (int i = 0; i < 1000; i++)
-            data.add(new Model(true, "Android", random.nextInt(), "Performance"));
-
-        return data;
-
-    }
-    public ArrayList<OptModel> generateOptDataSet() {
-        Random random = new Random();
-        ArrayList<OptModel> data = new ArrayList();
-        for (int i = 0; i < 1000; i++)
-            data.add(new OptModel(true, "Android", random.nextInt(), "Performance"));
-
-        return data;
-
-    }
-
 
 
 }

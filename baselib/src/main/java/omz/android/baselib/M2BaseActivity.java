@@ -8,10 +8,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.Random;
-
-import omz.android.baselib.model.Model;
 
 /**
  * Created by omrierez on 9/3/16.
@@ -35,6 +31,11 @@ public abstract class M2BaseActivity extends AppCompatActivity implements View.O
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        Double d=2d;
+        String s2="12";
+        String s3="1";
+        String s4="122";
+        String s5="13";
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity);
         initViews();
@@ -62,14 +63,12 @@ public abstract class M2BaseActivity extends AppCompatActivity implements View.O
             runLoop();
     }
 
-    protected ArrayList<Model> generateDataSet() {
-        Random random = new Random();
-        ArrayList<Model> data = new ArrayList();
-        for (int i = 0; i < 1000; i++)
-            data.add(new Model(true, "Android", random.nextInt(), "Performance"));
-
-        return data;
-
+    protected void sleepDelay() {
+        try {
+            Thread.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
 
