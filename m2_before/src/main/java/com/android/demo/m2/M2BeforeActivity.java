@@ -11,7 +11,7 @@ import omz.android.baselib.M2BaseActivity;
 public class M2BeforeActivity extends M2BaseActivity {
     private static final String TAG = M2BeforeActivity.class.getSimpleName();
 
-    final static int ITERATIONS =4000;
+    final static int ITERATIONS = 4000;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -22,7 +22,7 @@ public class M2BeforeActivity extends M2BaseActivity {
 
     @Override
     protected void runLoop() {
-            new Thread() {
+        new Thread() {
             @Override
             public void run() {
                 //****************************problem 2.1*****************************************
@@ -30,64 +30,59 @@ public class M2BeforeActivity extends M2BaseActivity {
                 long sum = 0;
                 for (int i = 0; i < ITERATIONS; i++) {
                     sum += poorPerformanceLoop();
-                    //sleepDelay();
+                    sleepDelay();
                 }
                 Log.d(TAG, "Avg execution time : " + (float) sum / ITERATIONS);
             }
         }.start();
     }
+
     public long poorPerformanceLoop() {
         long timeStart = System.currentTimeMillis();
         ArrayList<Double> doubleNumbers = new ArrayList<>();
         for (int j = 0; j < 20; j++) {
-            String[] stringsNums = {"1", "2", "3", "4", "5", "6", "7", "8", "9","10",
-                    "11","12","13","14","15","16","17","18","19","20"};
-            double theDouble = new Double(stringsNums[j]).doubleValue();
-            doubleNumbers.add(theDouble);
+            String[] stringsNums = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
+                    "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"};
+            Double dObj = new Double(stringsNums[j]);
+            doubleNumbers.add(dObj);
         }
         return System.currentTimeMillis() - timeStart;
     }
 
-
-
-
-
-
-
-
-
-
     @Override
-    protected void loadImage() {
-        //*****************************************problem 2.2******************************************
-        mIvBackground.setImageResource(R.drawable.background);
-
-    }
-
-
-    @Override
-    protected void startRamUsageThread() {
+    protected void startRamUsage() {
         new Thread() {
             @Override
             public void run() {
                 super.run();
                 try {
-                    while (true) {
-                        sleep(20);
-                        //*****************************************problem 2.3*********************************************
+                    for (int i = 0; i < 500; i++) {
+                        //*****************************************problem 2.2*********************************************
                         mHandler.post(() -> {
                             String ramUsage = String.format("%.3f MB\nfree:%.3f MB",
                                     ((float) (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1000000),
                                     ((float) Runtime.getRuntime().freeMemory()) / 1000000);
                             mTvRamUsage.setText(ramUsage);
                         });
+                        sleep(10);
                     }
+                    Log.d(TAG,"Finished");
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
         }.start();
     }
+
+    @Override
+    protected void loadImage() {
+        //*****************************************problem 2.3******************************************
+        mIvBackground.setImageResource(R.drawable.background);
+
+    }
+
+
+
 
 
 }

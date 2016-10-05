@@ -22,23 +22,34 @@ public abstract class M2BaseActivity extends AppCompatActivity implements View.O
     protected TextView mTvRamUsage;
 
     //Core methods to be invoked by clicking on the fabs
+
     protected abstract void runLoop();              //2.1
 
-    protected abstract void loadImage();            //2.2
+    protected abstract void startRamUsage();  //2.2
 
-    protected abstract void startRamUsageThread();  //2.3
+    protected abstract void loadImage();            //2.3
+
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        Double d=2d;
-        String s2="12";
-        String s3="1";
-        String s4="122";
-        String s5="13";
+        simpleAllocation();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity);
         initViews();
+    }
+
+    private void simpleAllocation() {
+        Object obj = new Object();
+        Float f = new Float(2.22);
+        Double d = new Double(11d);
+        int intPrim = 123;
+        double doublePrim = 1111d;
+        String s1 = "1";
+        String s2 = "12";
+        String s3 = "123";
+        String s4 = "1234";
+        String s5 = "12345";
     }
 
     private void initViews() {
@@ -56,7 +67,7 @@ public abstract class M2BaseActivity extends AppCompatActivity implements View.O
 
         final int resId = view.getId();
         if (resId == R.id.fab1)
-            startRamUsageThread();
+            startRamUsage();
         else if (resId == R.id.fab2)
             loadImage();
         else if (resId == R.id.fab3)
