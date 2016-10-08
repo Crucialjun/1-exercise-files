@@ -29,8 +29,6 @@ public abstract class M2BaseActivity extends AppCompatActivity implements View.O
 
     protected abstract void loadImage();            //2.3
 
-
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         simpleAllocation();

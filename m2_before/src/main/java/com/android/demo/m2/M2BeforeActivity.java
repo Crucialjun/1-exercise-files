@@ -11,7 +11,6 @@ import omz.android.baselib.M2BaseActivity;
 public class M2BeforeActivity extends M2BaseActivity {
     private static final String TAG = M2BeforeActivity.class.getSimpleName();
 
-    final static int ITERATIONS = 4000;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -19,7 +18,7 @@ public class M2BeforeActivity extends M2BaseActivity {
         super.onCreate(savedInstanceState);
     }
 
-
+    final static int ITERATIONS = 40000;
     @Override
     protected void runLoop() {
         new Thread() {
@@ -30,7 +29,7 @@ public class M2BeforeActivity extends M2BaseActivity {
                 long sum = 0;
                 for (int i = 0; i < ITERATIONS; i++) {
                     sum += poorPerformanceLoop();
-                    sleepDelay();
+                    //sleepDelay();
                 }
                 Log.d(TAG, "Avg execution time : " + (float) sum / ITERATIONS);
             }
@@ -59,9 +58,7 @@ public class M2BeforeActivity extends M2BaseActivity {
                     for (int i = 0; i < 500; i++) {
                         //*****************************************problem 2.2*********************************************
                         mHandler.post(() -> {
-                            String ramUsage = String.format("%.3f MB\nfree:%.3f MB",
-                                    ((float) (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1000000),
-                                    ((float) Runtime.getRuntime().freeMemory()) / 1000000);
+                            String ramUsage = String.format("%.2f", ((float) (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1000000))+"MB\nfree:"+String.format("%.2f MB",(float) Runtime.getRuntime().freeMemory() / 1000000);
                             mTvRamUsage.setText(ramUsage);
                         });
                         sleep(10);
