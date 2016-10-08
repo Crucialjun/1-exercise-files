@@ -1,9 +1,0 @@
-
--type at the terminal: adb push contacts.vcf /sdcard/contacts.vcf
--type at the terminal: adb sync
--Emulator:
-    - Start emulator with Android 6.0 or higher.
-    - Login with a test Gmail account.
-    - Open contacts app and in the menu, choose import.
-    - Make sure the sd card is visible in the menu.
-    - Locate contacts.vcf in sdcard and import it.
