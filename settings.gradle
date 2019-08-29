@@ -1,1 +1,2 @@
 include ':m2_before', ':m2_after', ':baselib'
+include ':app'
