@@ -1,8 +1,9 @@
 package com.android.demo.m2;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.util.Log;
+
 
 import java.util.ArrayList;
 
